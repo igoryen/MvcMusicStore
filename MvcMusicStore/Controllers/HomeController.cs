@@ -7,7 +7,6 @@ using System.Web.Mvc;
 namespace MvcMusicStore.Controllers {
   public class HomeController : Controller {
     public ActionResult Index() {
-      ViewBag.Message = "I like cake!";
 
       return View();
     }
