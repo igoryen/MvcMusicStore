@@ -19,9 +19,9 @@ namespace MvcMusicStore.Controllers {
       return message;
     }
     // GET: /Store/Details/5
-    public string Details(int id) {
-      string message = "Store.Details, ID = " + id;
-      return message;
+    public ActionResult Details(int id) {
+      var album = new Album { Title = "Album " + id };
+      return View(album);
     }
 
     public ActionResult Edit() {
