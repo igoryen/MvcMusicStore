@@ -15,27 +15,27 @@ namespace MvcMusicStore.Controllers {
     // GET: /StoreManager/
 
     public ActionResult Index() {
-      var albums = db.Albums.Include(a => a.Genre).Include(a => a.Artist);
-      return View(albums.ToList());
+      var albums = db.Albums.Include(a => a.Genre).Include(a => a.Artist); // 10
+      return View(albums.ToList()); // 11
     }
 
     //
     // GET: /StoreManager/Details/5
 
     public ActionResult Details(int id = 0) {
-      Album album = db.Albums.Find(id);
+      Album album = db.Albums.Find(id); // 20
       if (album == null) {
         return HttpNotFound();
       }
-      return View(album);
+      return View(album); // 24 
     }
 
     //
     // GET: /StoreManager/Create
 
-    public ActionResult Create() {
-      ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
-      ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
+    public ActionResult Create() { // 30
+      ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name"); // 31
+      ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name"); // 32
       return View();
     }
 
@@ -44,11 +44,11 @@ namespace MvcMusicStore.Controllers {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(Album album) {
-      if (ModelState.IsValid) {
-        db.Albums.Add(album);
-        db.SaveChanges();
-        return RedirectToAction("Index");
+    public ActionResult Create(Album album) { // 43
+      if (ModelState.IsValid) { // 44
+        db.Albums.Add(album); // 45
+        db.SaveChanges(); // 46
+        return RedirectToAction("Index"); //47
       }
 
       ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
@@ -76,7 +76,7 @@ namespace MvcMusicStore.Controllers {
     [ValidateAntiForgeryToken]
     public ActionResult Edit(Album album) {
       if (ModelState.IsValid) {
-        db.Entry(album).State = EntityState.Modified;
+        db.Entry(album).State = EntityState.Modified; // 70
         db.SaveChanges();
         return RedirectToAction("Index");
       }
